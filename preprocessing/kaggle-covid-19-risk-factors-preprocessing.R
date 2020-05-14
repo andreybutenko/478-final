@@ -8,8 +8,6 @@ raw_data <- read.csv('../data/raw/Kaggle - US COVID-19 Risk Factors Assessment D
 # TODO: Preprocessing based on what we want to explore in the risk factors data.
 
 library(dplyr)
-library(readxl)
-
 # processing data for commuter and-Covid related information
 commuter_clean_data <- raw_data %>% 
   select(REGION, 
