@@ -32,3 +32,21 @@ write.csv(commuter_clean_data,
           '../data/prepped/covid-19-commuter-data-prepped.csv',
           row.names = F)
 
+View(raw_data)
+colnames(raw_data)
+
+density_clean_data <- raw_data %>%
+  select(REGION,
+         X2020_STATE_DENSITY,
+         Census_Population_Over_60,
+         Covid_Positive_4_4,
+         Covid_Death_4_4,
+         Covid_Hospitalized_Cumulative_4_4,
+         Covid_ICU_Cumulative_4_4,
+         Covid_Total_Test_Results
+         ) %>%
+  rename(Region = REGION,
+         State_Density = X2020_STATE_DENSITY)
+write.csv(density_clean_data,
+          '../data/prepped/covid-19-density-data-prepped.csv',
+          row.names = F)
