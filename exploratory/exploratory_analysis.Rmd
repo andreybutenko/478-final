@@ -6,10 +6,49 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+library(knitr)
+library(kableExtra)
 source('./Commuting_Analysis.R')
+source('./covid19_dist_analysis.R')
 source('./state_density.R')
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
+
+## Distribution of Positive COVID-19 Testing Rates
+
+```{r, fig.width = 10}
+case_dist.positive_rate_plots
+```
+
+<div style="display: flex;">
+<div style="flex: 2;">
+<!-- Using h3 instead of markdown syntax because formatting breaks otherwise --->
+<h3>Positive COVID-19 Testing Rates by State</h3>
+
+```{r}
+kable(case_dist.stat_positive_rate) %>% 
+  kable_styling(full_width = F)
+```
+
+</div>
+<div style="flex: 3; margin-left: 32px;">
+<!-- Using h3 instead of markdown syntax because formatting breaks otherwise --->
+<h3>Analysis</h3>
+
+These three visualizations assess the distribution of positive COVID-19 testing rates. In other words, these visualizations show what proportion of COVID-19 tests have positive results in a way that enables us to compare this rate across states and across regions.
+
+The distribution of COVID-19-positive testing rates by state is positively skewed. The majority of states have low rates of COVID-19-positive tests.
+
+This is evident in the visualizations, but also in the table summary. The median positive testing rate is 9.2%, so half of U.S. states have a positive testing rate of less than 9.2%. The upper quartile positive testing rate is 14.6%, so three-quarters of U.S. states have a positive testing rate of less than 14.6%. The most extreme example of this positive skew are naturally-isolated states like Hawaii and Alaska where less than 2.9% of tests are positive.
+
+However, the maximum testing rate is 55%. The most extreme examples of this are are New York, New Jersey, Oklahoma, and Michigan which have 40%-55% positive testing rates.
+
+A limitation of assessing this metric is that it reflects testing strategy as well as COVID-19 prevalance. A state with a high positive testing rate could reflect one of two scenarios. First, that state could have a low COVID-19 prevalance, but is testing people who are pretty certain to have COVID-19. Second, that state could have a high COVID-19 prevalence, but is testing most people.
+
+For this reason, the distribution of this metric alone is insufficient. In addition, the distribution of prevalance should be considered.
+
+</div>
+</div>
 
 ## R Markdown
 

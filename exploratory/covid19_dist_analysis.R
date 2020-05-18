@@ -1,12 +1,13 @@
 library(dplyr)
 library(ggplot2)
+library(patchwork)
 
 case_dist.risk_factors <- read.csv('../data/raw/Kaggle - US COVID-19 Risk Factors Assessment Data.csv',
                          stringsAsFactors = F)
 
 case_dist.get_labelled_fivenum <- function(x) {
   data.frame(
-    Metric = c('Minimum', 'Lower Quartile', 'Median', 'Upper Quartile', 'Maximum'),
+    Measure = c('Minimum', 'Lower Quartile', 'Median', 'Upper Quartile', 'Maximum'),
     Value = fivenum(x),
     stringsAsFactors = F
   )
@@ -41,7 +42,7 @@ case_dist.hist_positive_rate <- ggplot(case_dist.data, aes(x = positive_rate)) +
   scale_x_continuous(breaks = seq(from = 0,
                                   to = max(case_dist.data$positive_rate),
                                   by = 0.05)) +
-  labs(title = 'Distribution of Positive COVID-19 Testing Rates by State',
+  labs(title = 'Distribution of COVID-19+ Testing Rates by State',
        subtitle = 'What proportion of tests are positive for COVID-19?',
        x = 'Positive COVID-19 Testing Rate',
        y = 'Count of States')
@@ -51,10 +52,13 @@ case_dist.box_positive_rate <- case_dist.data %>%
   ggplot(aes(x = positive_rate,
              y = region)) +
   geom_boxplot() +
-  labs(title = 'Distribution of Positive COVID-19 Testing Rates by Region',
+  labs(title = 'Distribution of COVID-19+ Testing Rates by Region',
        subtitle = 'What proportion of tests are positive for COVID-19?',
        x = 'Positive COVID-19 Testing Rate',
        y = 'Region')
+
+
+case_dist.positive_rate_plots <- case_dist.hist_positive_rate + case_dist.box_positive_rate
 
 # Descriptive summary stats  of positive COVID-19 testing rates
 case_dist.stat_positive_rate <- case_dist.get_labelled_fivenum(case_dist.data$positive_rate)
@@ -65,8 +69,8 @@ case_dist.hist_positives <- ggplot(case_dist.data, aes(x = positive_per_capita))
   scale_x_continuous(breaks = seq(from = 0,
                                   to = max(case_dist.data$positive_per_capita),
                                   by = 0.001)) +
-  labs(title = 'Distribution of Positive COVID-19 Tests per Capita by State',
-       subtitle = 'What proportion of the population test positive for COVID-19?',
+  labs(title = 'Distribution of COVID-19 Prevalence by State',
+       subtitle = 'What proportion of the population tested positive for COVID-19?',
        x = 'Positive COVID-19 Tests per Capita',
        y = 'Count of States')
 
@@ -76,10 +80,12 @@ case_dist.box_positives <- case_dist.data %>%
   ggplot(aes(x = positive_per_capita,
              y = region)) +
   geom_boxplot() +
-  labs(title = 'Distribution of Positive COVID-19 Tests per Capita by Region',
-       subtitle = 'What proportion of the population test positive for COVID-19?',
+  labs(title = 'Distribution of Positive COVID-19 Prevalence by Region',
+       subtitle = 'What proportion of the population tested positive for COVID-19?',
        x = 'Positive COVID-19 Tests per Capita',
        y = 'Region')
+
+case_dist.positives_plots <- case_dist.hist_positives + case_dist.box_positives
 
 # Descriptive summary stats  of positive COVID-19 tests
 case_dist.stat_positives <- case_dist.get_labelled_fivenum(case_dist.data$positive_per_capita)
