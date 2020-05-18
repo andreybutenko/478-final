@@ -6,6 +6,8 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+library(readxl)
+library(maps)
 library(knitr)
 library(kableExtra)
 source('./Commuting_Analysis.R')
@@ -69,3 +71,27 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+## Population Ecology and COVID Tests
+Knowing how COVID may affect certain demographics can allow certain interventions to be put in place that targets each demographics. 
+
+### Population Over 60
+For instance, with the COVID-19 breakout occurring initially in nursing homes in Washington, it may suggest implementing appropriate infection prevention and control measures for the staff and patients can help prevent the introduction of Covid-19.
+
+```{r age, echo=FALSE}
+density_viz_age_hover
+# density_viz_perc_hover
+# Looking at the graph above, there seems to be no relation between the density of a state and the number of tests that are performed. There also seems to be no obvious relations between the number of tests conducted and the number of positive tests. This graph attempts to find if there are any relations between how cities are responding.
+```
+
+COVID-19 is often mentioned to afflict the older population more than the younger ones. Observing the graph above, there seems to be no relation between the percentage of individuals over sixty in a population and the percentage of positive COVID test results, or the number of COVID deaths. This suggests the dataset we are using is likely insufficient; many epidemiological studies such as [McMichael et al. (2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2005412) seem to show otherwise.
+
+### State density
+Observing state population density and positive COVID-19 cases can also be an indicator of how density may affect the spread of COVID-19 given there is a higher chance of contact between agents. 
+```{r density, echo=FALSE}
+density_viz_perc_hover
+```
+
+Looking at the graph above, there seems to be no relation between the density of a state and the number of tests that are performed. There also seems to be no obvious relations between the number of tests conducted and the number of positive tests. It might be the case that given the limited testing that has been done, it is difficult to truly tell how many people within the population are infected.
+
