@@ -23,7 +23,7 @@ density_viz <- ggplot(data = density_data,
                         '<br><b>Covid Positive Tests: </b>', Covid_Positive_4_4)
            )) +
   geom_point() +
-  labs(x = "Density",
+  labs(x = "State Density",
        y = "Total number of tests",
        colour = "Covid positive tests") +
   ggtitle("State density and total number of COVID-19 tests")
