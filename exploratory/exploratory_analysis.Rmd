@@ -45,16 +45,16 @@ This is evident in the visualizations, but also in the table summary. The median
 
 However, the maximum testing rate is 55%. The most extreme examples of this are are New York, New Jersey, Oklahoma, and Michigan which have 40%-55% positive testing rates.
 
-A limitation of assessing this metric is that it reflects testing strategy as well as COVID-19 prevalance. A state with a high positive testing rate could reflect one of two scenarios. First, that state could have a low COVID-19 prevalance, but is testing people who are pretty certain to have COVID-19. Second, that state could have a high COVID-19 prevalence, but is testing most people.
+A limitation of assessing this metric is that it reflects testing strategy as well as COVID-19 prevalence. A state with a high positive testing rate could reflect one of two scenarios. First, that state could have a low COVID-19 prevalence, but is testing people who are pretty certain to have COVID-19. Second, that state could have a high COVID-19 prevalence, but is testing most people.
 
-For this reason, the distribution of this metric alone is insufficient. In addition, the distribution of prevalance should be considered.
+For this reason, the distribution of this metric alone is insufficient. In addition, the distribution of prevalence should be considered.
 
 </div>
 </div>
 
 ---
 
-## Distribution of COVID-19 Prevalance
+## Distribution of COVID-19 prevalence
 
 ```{r, fig.width = 10}
 case_dist.positives_plots
@@ -63,7 +63,7 @@ case_dist.positives_plots
 <div style="display: flex;">
 <div style="flex: 2;">
 <!-- Using h3 instead of markdown syntax because formatting breaks otherwise --->
-<h3>COVID-19 Prevalance by State</h3>
+<h3>COVID-19 prevalence by State</h3>
 
 ```{r}
 kable(case_dist.stat_positives) %>% 
@@ -83,7 +83,7 @@ This is evident in the visualizations, but also in the table summary. The upper 
 
 However, the maximum prevalence is 0.59%. The top one-quarter of U.S. states for prevalence include New York, New Jersey, Lousiana, Massachussetts, Connecticut, and Michigan. Each of these states have been reported as being particularly heavily hit by COVID-19, so it is understandable that this is reflected in the data.
 
-Four of the five top states for this metric are in the Northeast. This is reflected in the distributions by region: the prevalance of all Northeastern states is higher than the median prevalence of all non-Northeastern states. This indicates that this region is the hardest-hit by COVID-19, as 
+Four of the five top states for this metric are in the Northeast. This is reflected in the distributions by region: the prevalence of all Northeastern states is higher than the median prevalence of all non-Northeastern states. This indicates that this region is the hardest-hit by COVID-19, as 
 
 A strength of this metric is that it can appropriately compare COVID-19 impapacts by state across states of different population sizes. A limitation of this metric is that it is also somewhat linked to testing strategies: if some states are performing inadequate testing, they will be under-reported in this metric.
 
