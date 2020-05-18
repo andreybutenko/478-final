@@ -34,3 +34,5 @@ public_transportation_Viz <- ggplot(commuter_top_and_bot, aes(x = reorder(Region
                                    y = "Rate of Population with COvid-19") + theme_dark()
 
 
+public_transportation_Viz
+View(commuter_data)

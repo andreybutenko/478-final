@@ -34,6 +34,27 @@ density_viz_hover <- ggplotly(density_viz, tooltip="text") #how to include regio
 #final data
 density_viz_hover
 
-
-
 #NY and DC were removed as you wouldn't be able to see the rest of the data
+
+
+#route two
+density_viz_percent <- ggplot(data = density_data,
+                      aes(label = Region, #if text, no title; https://stackoverflow.com/questions/36325154/how-to-choose-variable-to-display-in-tooltip-when-using-ggplotly
+                          x = State_Density, 
+                          y = (Covid_Positive_4_4 / Covid_Total_Test_Results),
+                          # colour = Covid_Positive_4_4,
+                          #fill = Covid_Positive
+                          text = paste("<b>Region: </b>", Region,
+                                       '<br><b>State Density: </b>', State_Density, 
+                                       '<br>Percentage of tests positive: </b>', round((Covid_Positive_4_4 *100/ Covid_Total_Test_Results), 2), '%'
+                                       # '<br><b>Covid Total Test Results: </b>', Covid_Total_Test_Results,
+                                       # '<br><b>Covid Positive Tests: </b>', Covid_Positive_4_4
+                                       )
+                      )) +
+  geom_point() +
+  labs(x = "State Density",
+       y = "% of COVID-19 tests positive") +
+  ggtitle("State density and percentage of positive COVID-19 tests")
+
+# with hoverover
+density_viz_percent_hover <- ggplotly(density_viz_percent, tooltip="text") #how to include region
