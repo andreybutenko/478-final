@@ -12,6 +12,7 @@ library(knitr)
 library(kableExtra)
 source('./Commuting_Analysis.R')
 source('./covid19_dist_analysis.R')
+source('./industry_analysis.R')
 source('./state_density.R')
 knitr::opts_chunk$set(echo = FALSE)
 ```
@@ -92,26 +93,43 @@ A strength of this metric is that it can appropriately compare COVID-19 impapact
 
 ---
 
-## R Markdown
+## COVID-19 cases and industries by employment
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r, fig.width = 10}
+industry.compare_by_facet_interactive
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r, fig.width = 10}
+industry.compare_by_average_interactive
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+<div style="display: flex;">
+<div style="flex: 2;">
+<!-- Using h3 instead of markdown syntax because formatting breaks otherwise --->
+<h3>Industries with 1% or larger difference in employment between high prevalence and low prevalence states</h3>
 
+```{r}
+kable(industry.compare_by_table) %>% 
+  kable_styling(full_width = F)
+```
+
+</div>
+<div style="flex: 3; margin-left: 32px;">
+<!-- Using h3 instead of markdown syntax because formatting breaks otherwise --->
+<h3>Analysis</h3>
+
+COVID-19 can spread quickly though a workplace. Workplaces differ across industries, and some jobs are more readily transitioned to socially-distanced work than others. For this reason, it is valuable to explore the industries residents of different states are employed in to understand the relationship. In this, we will compare the proportions of industry of employment between the states with the highest COVID-19 prevalence and the states with the lowest COVID-19 prevalence.
+
+The first plot enables the 5 states of highest and lowest prevalence to be compared individually. However, it is different to make conclusions using this plot since these states are very diverse in their environment and economy. 7.18% of jobs in Hawaii are in Accomodations and Food Services compared to only 3.5% in New York, but this is likely an indication that Hawaii's economy is more tourism-based rather than a predictor of COVID-19 spread.
+
+The second plot enables the 5 states of highest prevalence to be compared against the 20 states of lowest prevalence. Since prevalence distribution is very positively skewed, the 20 states of lowest prevalence should be comparable in the same way as the 5 states of highest prevalence. Using more states limits the influence of outliers.
+
+Considering the second plot and the table highlighting the differences, we find the six industries with the largest difference in employment. It is surprising that nearly all industries (not just those in the table) have a lower share of employment in the top prevalence states compared to the low prevalence states, which is due to the unemployment rate. In future analysis, we should normalize the results to be able to compare the same industry in different states more appropriately. Without that normalization step of making total employment percentages equal to 100% it is challenging to make conclusions on this and it should be explored further. Additionally, since this issue is caused by the unemployment rate, perhaps homelessness is another factor to be considered in our analysis.
+
+</div>
+</div>
+
+---
 
 ## Population Ecology and COVID Tests
 Knowing how COVID may affect certain demographics can allow certain interventions to be put in place that targets each demographics. 
