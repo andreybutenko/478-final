@@ -14,6 +14,7 @@ source('./Commuting_Analysis.R')
 source('./covid19_dist_analysis.R')
 source('./industry_analysis.R')
 source('./state_density.R')
+source('./housing_exploratory_analysis.R')
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -131,8 +132,23 @@ Considering the second plot and the table highlighting the differences, we find 
 
 ---
 
+## Covid-19 and Commuting
+
+<h3>Lowest and Highest States by Public Transportation and Covid Cases</h3>
+```{r public_transportation, fig.width = 14, fig.height= 8}
+print(public_transportation_Viz)
+```
+
+<h3>Analysis</h3>
+
+This graph shows the top 5 and the bottom 5 states as sorted by percent of population that commutes to work using public transportation. All of the states that are in the botom have a rate of close to 0. The states that are in the lowest have less public transportation infrastructure to rely on, so the disease may spread less easily. 
+
+Communities and states that have to rely on public transportation may already have higher population density, which makes social distancing harder. Additionally, communities with high rates of public transportation may have a large population of essential workers that rely on that infrastructure. Even during a lockdown, public transportation is needed for the essential, which may aid in the spread of Covid. 
+
+---
+
 ## Population Ecology and COVID Tests
-Knowing how COVID may affect certain demographics can allow certain interventions to be put in place that targets each demographics. 
+Knowing how COVID may affect certain demographics can allow certain interventions to be put in place that targets each demographic. 
 
 ### Population Over 60
 For instance, with the COVID-19 breakout occurring initially in nursing homes in Washington, it may suggest implementing appropriate infection prevention and control measures for the staff and patients can help prevent the introduction of Covid-19.
@@ -140,7 +156,8 @@ For instance, with the COVID-19 breakout occurring initially in nursing homes in
 ```{r age, echo=FALSE}
 density_viz_age_hover
 # density_viz_perc_hover
-# Looking at the graph above, there seems to be no relation between the density of a state and the number of tests that are performed. There also seems to be no obvious relations between the number of tests conducted and the number of positive tests. This graph attempts to find if there are any relations between how cities are responding.
+# Looking at the graph above, there seems to be no relation between the density of a state and the number of tests that are performed. There also seems to be no obvious relations between the number of tests conducted and the number of positive tests. This graph attempts to find if there are any relations between how cities are responding. 
+
 ```
 
 COVID-19 is often mentioned to afflict the older population more than the younger ones. Observing the graph above, there seems to be no relation between the percentage of individuals over sixty in a population and the percentage of positive COVID test results, or the number of COVID deaths. This suggests the dataset we are using is likely insufficient; many epidemiological studies such as [McMichael et al. (2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2005412) seem to show otherwise.
@@ -152,4 +169,15 @@ density_viz_perc_hover
 ```
 
 Looking at the graph above, there seems to be no relation between the density of a state and the number of tests that are performed. There also seems to be no obvious relations between the number of tests conducted and the number of positive tests. It might be the case that given the limited testing that has been done, it is difficult to truly tell how many people within the population are infected.
+
+---
+
+## COVID-19 and Housing
+
+```{r apartment_building_units, echo = FALSE}
+building_size_vs_covid
+```
+
+This analysis attempts to explore whether or not states with higher proportions of large apartment buildings (housing 10 or more apartment units or seperate "households") have seen higher numbers of positive COVID-19 tests. The plot above compares the number of positive COVID-19 tests reported as of April 4, 2020 to the proportion of apartment buildings containing 10 or more units for each state. In order to calculate the proportion of apartment buildings with 10 or more units for each state, the number of buildings reported to have 10+ units was divided by the total number of apartment buildings (ones with 5-9 units + ones with 10+ units). One could hypothesize that states with higher proportions of large apartment buildings may have more dense populations, and therefore more transmission of COVID-19. The plot appears to show a very slight positive correlation between the proportion of large apartment buildings and the number of positive COVID-19 tests, with a jump near 80% large apartment buildings (presumably explained by a few large outliers). For the most part, the correlation between the proportion of large apartment buildings in each state and the number of positive COVID-19 tests seems to be quite weak, and we may need to look for more granular data in order to further explore the theory that apartment building size is proxy to population density and/or COVID transmission.
+
 
