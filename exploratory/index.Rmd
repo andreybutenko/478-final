@@ -16,6 +16,14 @@ source('./housing_exploratory_analysis.R')
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Introduction
+
+Through our project, we hope to better understand how the built environment affects the transmission of disease.
+
+We have identified a selection of datasets that have to do with how people live in relation to their environment, and we will analyze these datasets to determine what features correlate with flu rates and COVID-19 cases.
+
+For this exploratory assignment, we have done some initial analysis on a few features we were interested in.
+
 ## Distribution of Positive COVID-19 Testing Rates
 
 ```{r, fig.width = 10}
