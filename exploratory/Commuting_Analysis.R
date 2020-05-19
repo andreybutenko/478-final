@@ -30,9 +30,14 @@ public_transportation_Viz <- ggplot(commuter_top_and_bot, aes(x = reorder(Region
                                                               y = Covid_positive_rate, 
                                                               fill = Public_transportation_rate)) +
                                   geom_col() + scale_fill_gradient(low="white", high="darkblue") + 
-                              labs(x = "State",
-                                   y = "Rate of Population with COvid-19") + theme_dark()
+                              labs(
+                                   x = "State",
+                                   y = "Ratio of Population with COvid-19",
+                                   fill = "Public Transportation Commuters") + theme_dark()
 
 
-public_transportation_Viz
+public_transportation_scatter <- ggplot(commuter_data, 
+                                        aes(x = Public_transportation_rate, y = Covid_positive_rate)) + 
+  geom_point()
+
 View(commuter_data)

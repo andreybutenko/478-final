@@ -92,25 +92,18 @@ A strength of this metric is that it can appropriately compare COVID-19 impapact
 
 ---
 
-## R Markdown
+## Covid-19 and Commuting
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+<h3>Lowest and Highest States by Public Transportation and Covid Cases</h3>
+```{r public_transportation, fig.width = 14, fig.height= 8}
+print(public_transportation_Viz)
 ```
 
-## Including Plots
+<h3>Analysis</h3>
 
-You can also embed plots, for example:
+This graph shows the top 5 and the bottom 5 states as sorted by percent of population that commutesto work using public transportation. All of the states that are in the botom have a rate of close to 0. The states that are in the lowest have less public transportation infrastructure to rely on, so the disease may spread less easily. 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Communities and states that have to rely on public transportation may already have higher population density, which makes social distancing harder. Additionally, communities with high rates of public transportation may have a large population of essential workers that rely on that infrastructure. Even during a lockdown, public transportation is needed for the essential, which may aid in the spread of Covid. 
 
 
 ## Population Ecology and COVID Tests
@@ -122,7 +115,8 @@ For instance, with the COVID-19 breakout occurring initially in nursing homes in
 ```{r age, echo=FALSE}
 density_viz_age_hover
 # density_viz_perc_hover
-# Looking at the graph above, there seems to be no relation between the density of a state and the number of tests that are performed. There also seems to be no obvious relations between the number of tests conducted and the number of positive tests. This graph attempts to find if there are any relations between how cities are responding.
+# Looking at the graph above, there seems to be no relation between the density of a state and the number of tests that are performed. There also seems to be no obvious relations between the number of tests conducted and the number of positive tests. This graph attempts to find if there are any relations between how cities are responding. 
+
 ```
 
 COVID-19 is often mentioned to afflict the older population more than the younger ones. Observing the graph above, there seems to be no relation between the percentage of individuals over sixty in a population and the percentage of positive COVID test results, or the number of COVID deaths. This suggests the dataset we are using is likely insufficient; many epidemiological studies such as [McMichael et al. (2020)](https://www.nejm.org/doi/full/10.1056/NEJMoa2005412) seem to show otherwise.
