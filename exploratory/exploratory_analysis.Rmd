@@ -6,8 +6,6 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-library(readxl)
-library(maps)
 library(knitr)
 library(kableExtra)
 source('./Commuting_Analysis.R')
@@ -174,7 +172,7 @@ Looking at the graph above, there seems to be no relation between the density of
 
 ## COVID-19 and Housing
 
-```{r apartment_building_units, echo = FALSE}
+```{r apartment_building_units, echo = FALSE, warning = FALSE, message = FALSE}
 building_size_vs_covid
 ```
 
