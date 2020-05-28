@@ -10,6 +10,9 @@
 library(shiny)
 library(plotly)
 
+industry_full_data <- read.csv('./data/prepped/industry-covid19-full-data.csv',
+                               stringsAsFactors = F)
+
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
     'COVID-19 Transmission in Built Environments',
@@ -26,7 +29,13 @@ shinyUI(navbarPage(
                                  'Number of top states to show',
                                  min = 1,
                                  max = 20,
-                                 value = 5)
+                                 value = 5),
+                     selectInput('industry_split_sector',
+                                 'Industries to include',
+                                 choices = unique(industry_full_data$sector),
+                                 selected = unique(industry_full_data$sector),
+                                 selectize = T,
+                                 multiple = T)
                  ),
                  mainPanel(
                      plotlyOutput('industry_split',

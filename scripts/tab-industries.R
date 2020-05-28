@@ -12,6 +12,7 @@ industry_full_data <- read.csv('./data/prepped/industry-covid19-full-data.csv',
 # bar plots faceted by highest/lowest prevalence.
 get_split_proportion_industry_plot <- function(df = industry_full_data,
                                                num_rank = 5,
+                                               sector_filter = unique(industry_full_data$sector),
                                                state_col = 'state',
                                                employment_sector_col = 'sector',
                                                num_employment_col = 'employment',
@@ -30,7 +31,8 @@ get_split_proportion_industry_plot <- function(df = industry_full_data,
            prevalence_rank = prevalence_rank_col)
   
   res_plot <- df %>%
-    filter(prevalence_rank %in% c(1:num_rank, (51 - num_rank):50)) %>%
+    filter(prevalence_rank %in% c(1:num_rank, (51 - num_rank):50),
+           sector %in% sector_filter) %>%
     mutate(rank = ifelse(prevalence_rank <= num_rank, 'Highest Prevalence', 'Lowest Prevalence')) %>%
     ggplot(aes(y = state,
                x = prop_employment,
@@ -54,7 +56,3 @@ get_split_proportion_industry_plot <- function(df = industry_full_data,
   
   res_plot
 }
-
-get_split_proportion_industry_plot(num_rank = 3, plot_interactive = F)
-
-
