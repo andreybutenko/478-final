@@ -8,6 +8,7 @@
 #
 
 library(shiny)
+library(plotly)
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
@@ -18,7 +19,20 @@ shinyUI(navbarPage(
     tabPanel('Transportation'),
     tabPanel('Housing Density'),
     tabPanel('Influenza Correlations'),
-    tabPanel('Industries and Jobs'),
+    tabPanel('Industries and Jobs',
+             sidebarLayout(
+                 sidebarPanel(
+                     sliderInput('industry_split_num_rank',
+                                 'Number of top states to show',
+                                 min = 1,
+                                 max = 20,
+                                 value = 5)
+                 ),
+                 mainPanel(
+                     plotlyOutput('industry_split',
+                                  height="60vh")
+                 )
+             )),
     tabPanel('Conclusion',
              includeMarkdown('content/conclusions.md')),
     tabPanel('Sources',

@@ -9,7 +9,12 @@
 
 library(shiny)
 
+source('./scripts/tab-industries.R')
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-
+  output$industry_split <- renderPlotly({
+    get_split_proportion_industry_plot(num_rank = input$industry_split_num_rank,
+                                       plot_interactive = T)
+  })
 })

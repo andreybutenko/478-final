@@ -31,7 +31,7 @@ get_split_proportion_industry_plot <- function(df = industry_full_data,
   
   res_plot <- df %>%
     filter(prevalence_rank %in% c(1:num_rank, (51 - num_rank):50)) %>%
-    mutate(rank = ifelse(prevalence_rank <= 5, 'Highest Prevalence', 'Lowest Prevalence')) %>%
+    mutate(rank = ifelse(prevalence_rank <= num_rank, 'Highest Prevalence', 'Lowest Prevalence')) %>%
     ggplot(aes(y = state,
                x = prop_employment,
                fill = sector,
