@@ -4,26 +4,32 @@ library(tidyr)
 library(plotly)
 library(stringr)
 
-# Load and set up COVID-19 cases by state dataset ##############################
+industry_full_data <- read.csv('./data/prepped/industry-covid19-full-data.csv',
+                               stringsAsFactors = F)
 
-industry_covid19_cases <- read.csv('./data/raw/NYT - COVID-19 Cases by State by Time.csv',
-                                   stringsAsFactors = F) %>% 
-  filter(date == '2020-05-26',
-         !(state %in% c('District of Columbia', 'Guam', 'Northern Mariana Islands', 'Puerto Rico', 'Virgin Islands')))
+get_split_proportion_industry_plot <- function(df = industry_full_data,
+                                               state_col = 'state',
+                                               employment_sector_col = 'sector',
+                                               prop_employment_col = 'prop_employment',
+                                               perc_employment_col = 'perc_employment',
+                                               prevalence_col = 'prevalence') {
+  df <- df %>% 
+    rename(state = state_col,
+           sector = employment_sector_col,
+           prop_employment = prop_employment_col,
+           perc_employment = perc_employment,
+           prevalence = prevalence_col) %>% 
+    arrange(desc(prevalence))
+  
+  rank_df <- data.frame(
+    state = unique(df$state),
+    rank = length(unique(df$state)),
+    stringsAsFactors = F
+  )
+  
+  rank_df
+}
 
-# Load and set up industry employment by state dataset #########################
+get_split_proportion_industry_plot()
 
-industry_employment <- read.csv('./data/prepped/bea-2018-employment-counts-by-category-by-state.csv',
-                                stringsAsFactors = F)
-colnames(industry_employment) <- c('fips', 'state', 'code', 'sector', 'employment')
-
-industry_employment_aggregate <- industry_employment %>% 
-  group_by(fips) %>% 
-  summarize(total_employment = sum(employment))
-
-industry_employment <- industry_employment %>% 
-  left_join(industry_employment_aggregate, by = 'fips') %>% 
-  mutate(prop_employment = employment / total_employment,
-         perc_employment = paste0(round(prop_employment * 100, 2), '%')) %>% 
-  select(-total_employment)
 
