@@ -24,16 +24,15 @@ shinyServer(function(input, output) {
     
     # sort by top public transportation rates
     commuter_top_public_transit <- commuter_data_rate %>% 
-      top_n(5, as.numeric(input$mode_of_transportation)) %>% 
-      select(Region, input$death_pos, input$mode_of_transportation) %>% 
-      mutate(Top_value = T)
-    print(commuter_top_public_transit)
+      top_n(5, input$mode_of_transportation) %>% 
+      select(Region, input$death_pos, input$mode_of_transportation)
+    print(commuter_top_public_transit) # test code
+    
     # sort by bottom public transportation rates
     
     commuter_bot_public_transit <- commuter_data_rate %>% 
       top_n(-5, input$mode_of_transportation) %>% 
-      select(Region, input$death_pos, input$mode_of_transportation)%>% 
-      mutate(Top_value = F) 
+      select(Region, input$death_pos, input$mode_of_transportation)
     
     # combine information with boolean to color-sort by top and bottom
     
