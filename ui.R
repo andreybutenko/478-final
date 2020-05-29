@@ -12,6 +12,7 @@ library(plotly)
 
 industry_full_data <- read.csv('./data/prepped/industry-covid19-full-data.csv',
                                stringsAsFactors = F)
+source('exploratory/Commuting_Analysis.R')
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
@@ -19,7 +20,28 @@ shinyUI(navbarPage(
     
     tabPanel('Introduction',
              includeMarkdown('content/intro.md')),
-    tabPanel('Transportation'),
+    tabPanel('Transportation',
+            sidebarLayout(
+              sidebarPanel(
+                selectInput('mode_of_transportation',
+                            'Select a Mode of Transportation',
+                            choices = list("Drive" = "Drive_to_work_rate",
+                                           "Public Transportation" = "Public_transportation_rate",
+                                           "Walking" = "Walk_to_work_rate"),
+                            selected = "Public_transportation_rate"),
+                
+                radioButtons("death_pos", "Select a Metric",
+                             c("Covid Deaths" = "Covid_Mortality_rate",
+                               "Covid Positive Cases" = "Covid_positive_rate"),
+                             selected = "Covid_positive_rate")
+                            
+                
+              ),
+              mainPanel(
+                
+              )
+              
+            )),
     tabPanel('Housing Density'),
     tabPanel('Influenza Correlations'),
     tabPanel('Industries and Jobs',
