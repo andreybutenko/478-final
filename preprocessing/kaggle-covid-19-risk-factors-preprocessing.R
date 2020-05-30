@@ -38,7 +38,7 @@ colnames(raw_data)
 density_clean_data <- raw_data %>%
   select(REGION,
          X2020_STATE_DENSITY,
-         CENSUS_2010_TOTAL_POPULATION
+         CENSUS_2010_TOTAL_POPULATION,
          Census_Population_Over_60,
          Covid_Positive_4_4,
          Covid_Death_4_4,

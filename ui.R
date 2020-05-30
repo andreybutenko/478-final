@@ -9,10 +9,22 @@
 
 library(shiny)
 library(plotly)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(plotly)
 
 industry_full_data <- read.csv('./data/prepped/industry-covid19-full-data.csv',
                                stringsAsFactors = F)
 source('exploratory/Commuting_Analysis.R')
+
+industry_full_data <- read.csv('./data/prepped/industry-covid19-full-data.csv',
+                               stringsAsFactors = F)
+
+#df_raw_housing <- read.csv('./data/prepped/housingPlanningDBclean.csv', stringsAsFactors = F)
+# df_covid <- read.csv('./data/prepped/covid-19-density-data-prepped.csv',stringsAsFactors = F)
+
+#source('preprocessing/housing-characteristics.R')
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
@@ -41,7 +53,19 @@ shinyUI(navbarPage(
               )
               
             )),
-    tabPanel('Housing Density'),
+    tabPanel('Housing Density', # ------------------------------------------------------
+             sidebarLayout(
+               sidebarPanel(
+                 selectInput('select_covid_metric',
+                  "Covid_Metric",
+                  c("Covid_Hospitalized_Cumulative_4_4", "Covid_ICU_Cumulative_4_4", "Perc_Covid_Positive"))
+               ), #closes sidebarPanel
+               mainPanel(
+                 plotlyOutput('viz_housing_unit'),
+                 "some text here"
+               ) #closes main panel
+             )#closes sidebarLayout
+             ), #closes tabPanel Housing Density
     tabPanel('Influenza Correlations'),
     tabPanel('Industries and Jobs',
              sidebarLayout(

@@ -40,6 +40,4 @@ room_occupancy_vs_covid <- ggplot(data = room_occupant_df) +
                            y = room_occupant_df$Covid_Positive_4_4)) +
   geom_smooth(mapping = aes(x = room_occupant_df$rooms_1_51_plus_proportion,
                            y = room_occupant_df$Covid_Positive_4_4))
-
-  
   
