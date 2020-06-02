@@ -49,7 +49,8 @@ shinyUI(navbarPage(
                 
               ),
               mainPanel(
-                plotOutput("public_transportation")
+                plotOutput("public_transportation"),
+                plotOutput("nyc_covid")
               )
               
             )),
