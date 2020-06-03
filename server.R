@@ -25,11 +25,23 @@ shinyServer(function(input, output) {
                                        plot_interactive = T)
   })
   
-  output$public_transportation <- renderPlot({
-    # try out what was done for housing
+  transportationInput <- reactive({
+    if ( "Public Transportation" %in% input$transportation_metric) return(public_transportation_viz)
+    if ( "Drive" %in% input$transportation_metric) return(drive_viz)
   })
+  
+  output$transportation <- renderPlotly({   
+    trans_viz = transportationInput()
+    trans_viz <- ggplotly(trans_viz)
+    return(trans_viz)
+  }) 
+  
+  output$drive <- renderPlot({
+    drive_viz
+  })
+  
   output$nyc_covid <- renderPlot({
-    p
+    nyc_mapping
   })
   
   

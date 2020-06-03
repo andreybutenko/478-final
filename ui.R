@@ -35,21 +35,13 @@ shinyUI(navbarPage(
     tabPanel('Transportation',
             sidebarLayout(
               sidebarPanel(
-                selectInput('mode_of_transportation',
-                            'Select a Mode of Transportation',
-                            choices = list("Drive" = 'Drive_to_work_rate',
-                                           "Public Transportation" = 'Public_transportation_rate',
-                                           "Walking" = 'Walk_to_work_rate')),
-                
-                radioButtons("death_pos", "Select a Metric",
-                             c("Covid Deaths" = 'Covid_death_rate',
-                               "Covid Positive Cases" = 'Covid_positive_rate')
-                             )
-                            
-                
+                selectInput('transportation_metric',
+                            label = 'Select a Mode of Transportation',
+                            choices = list("Public Transportation", 
+                                           "Drive"))
               ),
               mainPanel(
-                plotOutput("public_transportation"),
+                plotlyOutput("transportation"),
                 plotOutput("nyc_covid")
               )
               
