@@ -34,3 +34,5 @@ influenza_v_covid_barplot <- ggplot(data = nyc_flu_covid_reshaped,
     name = "Illness",
     labels = c("Influenza (2018-2019)", "COVID-19")
   )
+
+# Scatterplot of influenza cases in NYC counties vs. covid cases in NYC counties

@@ -10,6 +10,7 @@
 library(shiny)
 
 source('./scripts/tab-industries.R')
+source('./scripts/tab-influenza.R')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
