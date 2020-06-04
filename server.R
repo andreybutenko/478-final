@@ -69,23 +69,23 @@ shinyServer(function(input, output) {
   
   #--- housing
   housingInput <- reactive({
-    if ( "Perc_Covid_Positive" %in% input$select_covid_metric) return(viz_housing_unit_covidpos_hov)
-    if ( "Covid_Hospitalized_Cumulative" %in% input$select_covid_metric) return(viz_housing_unit_covidhos)
-    if( "Covid_ICU_Cumulative" %in% input$select_covid_metric) return(viz_housing_unit_coviddeath) 
+    if ( "Percentage of COVID tests that were positive" %in% input$select_covid_metric) return(viz_housing_unit_covidpos_hov)
+    if ( "Cumulative hospitalizations due to COVID-19" %in% input$select_covid_metric) return(viz_housing_unit_covidhos_hov)
+    if( "Percentage of deaths due to COVID" %in% input$select_covid_metric) return(viz_housing_unit_coviddeath_hov) 
   })
   
   output$viz_housing_unit <- renderPlotly({
     housingViz = housingInput()
     print(housingViz)
   })
+  
+  output$viz_housing_crowded <- renderPlotly({
+    viz_house_crowded
+    print(viz_house_crowded)
+  })
 
 })
 
-
-#----------Housing Density-------------------------------------------------------------------------------------
-# completed vizzes 
-# viz_house_crowded
-# viz_house_unit_covid_hover
 
 
 

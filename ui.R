@@ -47,15 +47,27 @@ shinyUI(navbarPage(
               
             )),
     tabPanel('Housing Density', # ------------------------------------------------------
+             h1("How does housing structure environment affect the spread of disease?"),
+             span("We consider how living conditions can affect the spread of COVID-19 by taking a look at the housing structure. We take a look at whether the number of units within an apartment or condo can affect the transmission of COVID-19, assuming that the more units there are the more chances there are for individuals to infect one another. We use the cumulative number of COVID hospitalizations, percentage of COVID deaths, and percentage of COVID tests that came out positive as measures of how severely a state is affected by COVID. We use the dataset from the Planning Database, which combines data from the 2010 census and the 2014-2018 American Community Survey data. Here is a link to the"),
+             a("documentation of the Planning Database ", href="https://www.census.gov/content/dam/Census/topics/research/2020%20State%20and%20County%20PDB%20Documentation_V2.pdf"),
+             p(),
              sidebarLayout(
                sidebarPanel(
                  selectInput('select_covid_metric',
-                  "Covid_Metric",
-                  c("Covid_Hospitalized_Cumulative", "Covid_ICU_Cumulative", "Perc_Covid_Positive"))
+                  "Covid Metric",
+                  c("Cumulative hospitalizations due to COVID-19", "Percentage of deaths due to COVID", "Percentage of COVID tests that were positive")) #Covid_ICU_Cumulative
                ), #closes sidebarPanel
                mainPanel(
                  plotlyOutput('viz_housing_unit'),
-                 "some text here"
+                 div("The number of hospitalizations due to COVID, the percentages of deaths due to COVID, and the percentage of COVID tests that came out positive, plotted against the percentage of unit type (either a single unit, 2-9 units, or 10 units) in each region (state) does not seem to show any correlation. We also added in the state density to see if states that are denser are more likely to be more severely affected by COVID given COVID is transmitted via human to human interactions."),
+                 p(),
+                 div("New York was removed from the graph hospitalizations chart as the number of hospitalizations in New York were significantly higher (26,383 deaths) and deemed an anomaly (for the purposes of a better visualisation). A lot of the data were also missing for COVID hospitalizations across different states."),
+                 p(),
+                 div("Across all states, the percentage of single units is higher than the percentage of housing structures that have 2 to 9 units or 10 or more units. This is evident in how the data points are concentrated on the right side of the graph for the percentage single unit facet, while the percentage of houses with 2 to 9 units, or 10 or more units are more concentrated on the left hand side. "),
+                 p(),
+                 hr(),
+                 plotlyOutput('viz_housing_crowded'),
+                 div("more text")
                ) #closes main panel
              )#closes sidebarLayout
              ), #closes tabPanel Housing Density
