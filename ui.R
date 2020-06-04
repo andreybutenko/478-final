@@ -65,9 +65,12 @@ shinyUI(navbarPage(
                  p(),
                  div("Across all states, the percentage of single units is higher than the percentage of housing structures that have 2 to 9 units or 10 or more units. This is evident in how the data points are concentrated on the right side of the graph for the percentage single unit facet, while the percentage of houses with 2 to 9 units, or 10 or more units are more concentrated on the left hand side. "),
                  p(),
+                 div("We must mention that the housing data is based on the 2010 census, and a lot of changes to the housing structure may have occurred since then. It was the most recent data that was available. We are also unable to tell how spread out the units are from one another, as well as the common facilities that are shared between the different house units; these are important factors in the analysis of how housing structure may affect the transmission of COVID-19 given that more shared facilities means individuals are more likely to interact with one another"),
                  hr(),
                  plotlyOutput('viz_housing_crowded'),
-                 div("more text")
+                 div("Comparing the percentage of COVID tests that turned out positive to the percentage of occupied housing that were crowded, we see that there seems to be no correlation between the two variables."),
+                 p(),
+                 div("")
                ) #closes main panel
              )#closes sidebarLayout
              ), #closes tabPanel Housing Density
