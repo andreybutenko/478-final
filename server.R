@@ -36,4 +36,8 @@ shinyServer(function(input, output) {
     industry_rank_proportion_df() %>% 
       get_rank_proportion_industry_diff_table(diff_threshold = input$industry_rank_diff_thresh / 100)
   })
+  
+  output$industry_covid19_prev_dist_viz <- renderPlot({
+    get_covid19_prevalence_dist_industry()
+  })
 })

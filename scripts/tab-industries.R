@@ -129,3 +129,22 @@ get_rank_proportion_industry_diff_table <- function(df,
     rename(Industry = sector,
            Difference = diff)
 }
+
+get_covid19_prevalence_dist_industry <- function(df = industry_full_data) {
+  df %>% 
+    select(state, prevalence) %>% 
+    distinct(state, .keep_all = T) %>%
+    mutate(prevalence = prevalence) %>% 
+    ggplot(aes(x = prevalence)) +
+    geom_histogram(binwidth = 0.0005) +
+    scale_x_continuous(breaks = seq(from = 0,
+                                    to = 0.020,
+                                    by = 0.001)) +
+    scale_y_continuous(breaks = seq(from = 0,
+                                    to = 7,
+                                    by = 1)) +
+    labs(title = 'Distribution of COVID-19 prevalence',
+         x = 'COVID-19 Prevalence',
+         y = 'Count of States') +
+    theme(axis.text.x = element_text(vjust = 0.5, angle = 90))
+}

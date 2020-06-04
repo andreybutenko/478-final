@@ -23,6 +23,8 @@ shinyUI(navbarPage(
     tabPanel('Housing Density'),
     tabPanel('Influenza Correlations'),
     tabPanel('Industries and Jobs',
+             h1('How does the job environment affect the spread of disease?'),
+             p('COVID-19 can spread quickly though a workplace. Workplaces differ across industries, and some workplaces are easier implement socially-distancing measures in than others. For this reason, it is valuable to explore the industries residents of different states are employed in to understand the relationship. In this, we will compare the proportions of industry of employment between the states with the highest COVID-19 prevalence and the states with the lowest COVID-19 prevalence.'),
              sidebarLayout(
                  sidebarPanel(
                      sliderInput('industry_split_num_rank',
@@ -79,7 +81,8 @@ shinyUI(navbarPage(
              
              hr(),
              
-             includeMarkdown('content/tab-industries-conclusions.md')),
+             column(3, plotOutput('industry_covid19_prev_dist_viz')),
+             column(12 - 3, includeMarkdown('content/tab-industries-conclusions.md'))),
     tabPanel('Conclusion',
              includeMarkdown('content/conclusions.md')),
     tabPanel('Sources',
