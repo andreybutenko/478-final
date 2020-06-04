@@ -3,22 +3,22 @@ library(ggplot2)
 library(tidyr)
 library(readxl)
 library(maps)
-commuter_data <- read.csv('../data/prepped/covid-19-commuter-data-prepped.csv', stringsAsFactors = F)
+commuter_data <- read.csv('./data/prepped/covid-19-commuter-data-prepped.csv', stringsAsFactors = F)
 
 # create rate data
-commuter_data <- commuter_data %>% 
+commuter_data_rate <- commuter_data %>% 
   mutate(Covid_positive_rate  = Covid_Positive_4_4 / Total_Population_2010,
          Covid_death_rate = Covid_positive_rate / Total_Population_2010,
          Covid_Mortality_rate = Covid_Death_4_4 / Covid_Positive_4_4)
 
 # sort by top public transportation rates
-commuter_top_public_transit <- commuter_data %>% 
+commuter_top_public_transit <- commuter_data_rate %>% 
   top_n(5, Public_transportation_rate) %>% 
   select(Region, Covid_positive_rate, Public_transportation_rate) %>% 
   mutate(Top_value = T)
 
 # sort by bottom public transportation rates
-commuter_bot_public_transit <- commuter_data %>% 
+commuter_bot_public_transit <- commuter_data_rate %>% 
   top_n(-5, Public_transportation_rate) %>% 
   select(Region, Covid_positive_rate, Public_transportation_rate)%>% 
   mutate(Top_value = F) 
@@ -36,7 +36,4 @@ public_transportation_Viz <- ggplot(commuter_top_and_bot, aes(x = reorder(Region
                                    fill = "Public Transportation Commuters") + theme_dark()
 
 
-public_transportation_scatter <- ggplot(commuter_data, 
-                                        aes(x = Public_transportation_rate, y = Covid_positive_rate)) + 
-  geom_point()
 
