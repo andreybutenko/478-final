@@ -96,7 +96,7 @@ get_rank_proportion_industry_plot <- function(df,
                              'Proportion of people in industry across selected industries: ', perc_employment))) +
     geom_bar(position = 'fill',
              stat = 'identity') +
-    labs(title = 'Average proportion of jobs by industry across states with highest and lowest COVID-19 prevalence',
+    labs(title = 'Proportion of jobs by industry across states with highest and lowest COVID-19 prevalence',
          subtitle = 'Comparing states with highest and lowest COVID-19 prevalence',
          x = 'Proportion of jobs in industry',
          y = 'State') +
