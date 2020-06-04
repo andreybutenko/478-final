@@ -40,6 +40,10 @@ shinyServer(function(input, output) {
     drive_viz
   })
   
+  output$Borough <- renderPlot({
+    borough_graph
+  })
+  
   output$nyc_covid <- renderPlot({
     nyc_mapping
   })

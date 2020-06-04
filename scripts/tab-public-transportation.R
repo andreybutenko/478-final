@@ -93,17 +93,23 @@ nyc_covid_clean <- nyc_covid %>%
          "COVID_CASE_RATE",
          "COVID_DEATH_RATE") %>% 
   filter(BOROUGH_GROUP != "Staten Island") %>% 
-  rename("Borough"  = BOROUGH_GROUP) 
+  rename("Borough"  = BOROUGH_GROUP) %>% 
+  group_by(Borough) %>% 
+  dplyr::summarise(covid_pos_rate = mean(COVID_CASE_RATE))
 
 nyc_covid_clean$Borough[nyc_covid_clean$Borough == "Bronx"] <- "The Bronx"
 
 
 joined_data <- left_join(nyc_covid_clean, nyc_subway_clean, by = "Borough")
 
-borough_graph <- ggplot(joined_data, aes(x = reorder(Borough, COVID_CASE_RATE), 
-                             y = COVID_CASE_RATE,
+borough_graph <- ggplot(joined_data, aes(x = reorder(Borough, covid_pos_rate), 
+                             y = covid_pos_rate,
                              fill = total_cases)) + geom_col() + 
-  scale_fill_gradient(low="white", high="darkblue")
+  scale_fill_gradient(low="white", high="darkblue") + labs(
+    x = "New York City Boroughs",
+    y = "Covid Cases per 100,000",
+    fill = "Subway Traffic"
+  )
 
 
 
@@ -132,10 +138,11 @@ nyc_zip_merge <- left_join(nyc_zip_covid, zipcode_clean, by = "zip")
 
 nyc_map <- map_data('state')
 
-
+nyc_stat_loc <- read.csv('./data/prepped/nyc_station_location.csv', stringsAsFactors = F)
 nyc_mapping <- ggplot(nyc_zip_merge, aes(longitude, latitude)) +
   geom_polygon(data = nyc_map, aes(x=long,y=lat, group = group),color='gray',fill=NA,alpha=.5) + 
-  geom_point(aes(color = COVID_CASE_RATE)) +
-  xlim(-74.3,-73.7)+ylim(40.4,40.9)
+  geom_point(aes(color = COVID_CASE_RATE), size = 10, alpha=.8) + scale_color_gradient(low="white", high="orange") +
+  xlim(-74.3,-73.7)+ylim(40.4,40.9) +
+  geom_point(data = nyc_stat_loc, aes(x=long, y=lat), color='darkblue', alpha=.3, size=3)
 
 
