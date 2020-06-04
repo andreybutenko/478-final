@@ -8,10 +8,7 @@
 #
 
 library(shiny)
-# library(dplyr)
-# library(ggplot2)
-# library(tidyr)
-# library(plotly)
+library(dplyr)
 
 source('./scripts/tab-industries.R')
 source('./scripts/tab-public-transportation.R')
@@ -25,11 +22,48 @@ shinyServer(function(input, output) {
                                        plot_interactive = T)
   })
   
-  output$public_transportation <- renderPlot({
-    # try out what was done for housing
+  industry_rank_proportion_df <- reactive({
+    get_rank_proportion_industry_df(df = industry_full_data,
+                                    num_top_rank = input$industry_rank_num_top,
+                                    num_bot_rank = input$industry_rank_num_bot,
+                                    sector_filter = input$industry_rank_split_sector)
   })
+  
+  output$industry_rank_viz <- renderPlotly({
+    industry_rank_proportion_df() %>% 
+      get_rank_proportion_industry_plot(plot_interactive = T)
+  })
+  
+  output$industry_rank_table <- renderTable({
+    industry_rank_proportion_df() %>% 
+      get_rank_proportion_industry_diff_table(diff_threshold = input$industry_rank_diff_thresh / 100)
+  })
+  
+  output$industry_covid19_prev_dist_viz <- renderPlot({
+    get_covid19_prevalence_dist_industry()
+  })
+
+  transportationInput <- reactive({
+    if ( "Public Transportation" %in% input$transportation_metric) return(public_transportation_viz)
+    if ( "Drive" %in% input$transportation_metric) return(drive_viz)
+  })
+  
+  output$transportation <- renderPlotly({   
+    trans_viz = transportationInput()
+    trans_viz <- ggplotly(trans_viz)
+    return(trans_viz)
+  }) 
+  
+  output$drive <- renderPlot({
+    drive_viz
+  })
+  
+  output$Borough <- renderPlot({
+    borough_graph
+  })
+  
   output$nyc_covid <- renderPlot({
-    p
+    nyc_mapping
   })
   
   
@@ -44,7 +78,7 @@ shinyServer(function(input, output) {
     housingViz = housingInput()
     print(housingViz)
   })
-  
+
 })
 
 
