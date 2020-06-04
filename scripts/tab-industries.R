@@ -11,6 +11,10 @@ industry_prop_to_perc <- function(x) {
   paste0(round(x * 100, 2), '%')
 }
 
+industry_wrap_label <- function(x) {
+  str_wrap(x, 20)
+}
+
 # Create a plot that compares the jobs by industry distribution in the top
 # `num_rank` states and bottom `num_rank` states by COVID-19 prevalence through
 # bar plots faceted by highest/lowest prevalence.
@@ -21,11 +25,17 @@ get_split_proportion_industry_plot <- function(df = industry_full_data,
   res_plot <- df %>%
     filter(prevalence_rank %in% c(1:num_rank, (51 - num_rank):50),
            sector %in% sector_filter) %>%
-    mutate(rank = ifelse(prevalence_rank <= num_rank, 'Highest Prevalence', 'Lowest Prevalence')) %>%
-    ggplot(aes(y = state,
+    mutate(rank = ifelse(prevalence_rank <= num_rank, 'Highest Prevalence', 'Lowest Prevalence'),
+           highest_prevalence = rank == 'Highest Prevalence') %>%
+    ggplot(aes(y = reorder(state, -prevalence_rank),
                x = prop_employment,
-               fill = sector,
+               fill = industry_wrap_label(sector),
                text = paste0('<b>', sector, ' in ', state, '</b>\n',
+                             state, ': #',
+                             ifelse(highest_prevalence, prevalence_rank, 51 - prevalence_rank),
+                             ' ',
+                             ifelse(highest_prevalence, 'most', 'least'),
+                             ' COVID-19 prevalent state\n',
                              'Jobs in industry: ', employment, '\n',
                              'Proportion of people in industry: ', perc_employment))) +
     geom_bar(position = 'fill',
@@ -33,6 +43,7 @@ get_split_proportion_industry_plot <- function(df = industry_full_data,
     labs(title = 'Proportion of jobs by industry per states of highest and lowest COVID-19 prevalence',
          x = 'Proportion of jobs in industry',
          y = 'State') +
+    guides(fill = guide_legend(title = 'Industry')) +
     facet_wrap(~rank,
                scales = "free_y")
   
@@ -77,9 +88,9 @@ get_rank_proportion_industry_df <- function(df = industry_full_data,
 get_rank_proportion_industry_plot <- function(df,
                                               plot_interactive = F) {
   res_plot <- df %>%
-    ggplot(aes(y = rank,
+    ggplot(aes(y = industry_wrap_label(rank),
                x = prop_employment,
-               fill = sector,
+               fill = industry_wrap_label(sector),
                text = paste0('<b>', sector, ' in ', rank, '</b>\n',
                              'Jobs in industry: ', employment, '\n',
                              'Proportion of people in industry across selected industries: ', perc_employment))) +
@@ -88,7 +99,8 @@ get_rank_proportion_industry_plot <- function(df,
     labs(title = 'Average proportion of jobs by industry across states with highest and lowest COVID-19 prevalence',
          subtitle = 'Comparing states with highest and lowest COVID-19 prevalence',
          x = 'Proportion of jobs in industry',
-         y = 'State')
+         y = 'State') +
+    guides(fill = guide_legend(title = 'Industry'))
   
   if(plot_interactive) {
     return(ggplotly(res_plot,
