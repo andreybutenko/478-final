@@ -36,12 +36,12 @@ shinyUI(navbarPage(
             sidebarLayout(
               sidebarPanel(
                 selectInput('transportation_metric',
-                            label = 'Select a Mode of Transportation',
+                            label = 'Select a Method of Commuting to Work',
                             choices = list("Public Transportation", 
-                                           "Drive"))
+                                           "Drive")), width = 3
               ),
               mainPanel(
-                plotlyOutput("transportation"),
+                plotlyOutput("transportation", width = "1000px"),
                 plotOutput("nyc_covid"),
                 plotOutput("Borough")
               )

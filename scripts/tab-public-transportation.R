@@ -4,6 +4,7 @@ library(tidyr)
 library(plotly)
 library(maps)
 library(remotes)
+library(stringr)
 # install_version("zipcode", '1.0')
 library(zipcode)
 commuter_data <- read.csv('./data/prepped/covid-19-commuter-data-prepped.csv', stringsAsFactors = F)
@@ -38,7 +39,7 @@ public_transportation_viz <- ggplot(commuter_top_and_bot, aes(x = reorder(Region
   labs(
     x = "State",
     y = "Ratio of Population with COvid-19",
-    fill = "Public Transportation Commuters") + theme_dark()
+    fill = "Ratio of Public Trans.") + theme_dark()
 
 
 
@@ -68,7 +69,7 @@ drive_viz <- ggplot(commuter_top_and_bot_drive, aes(x = reorder(Region, Covid_po
   labs(
     x = "State",
     y = "Ratio of Population with COvid-19",
-    fill = "Drive to Work Commuters") + theme_dark()
+    fill = "Ratio of Driving") + theme_dark()
 
 
 
