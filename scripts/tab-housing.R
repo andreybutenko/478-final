@@ -147,7 +147,7 @@ viz_house_unit_covid <- ggplot(data = df_house_covid_units,
                       ) #closes text
            ) #closes aes
        ) + #closes ggplot
-  geom_smooth(method="lm") +
+  #geom_smooth(method="lm") +
   geom_point() + facet_grid(~unit) +
   ggtitle("Housing Units and COVID Positive Tests") +
   xlab("Percentage of unit type in region") +
@@ -194,7 +194,7 @@ viz_house_crowded <- ggplot(data = df_house_covid_units,
   xlab("Percentage of occupied housing units that are crowded") +
   ylab("Percentage of Covid Positive Tests") + geom_smooth()
 
-# viz_house_crowded
+viz_house_crowded
 
 
 #----- final visualisations

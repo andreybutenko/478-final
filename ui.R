@@ -6,7 +6,6 @@
 #
 #    http://shiny.rstudio.com/
 #
-
 library(shiny)
 library(plotly)
 library(dplyr)
@@ -52,7 +51,7 @@ shinyUI(navbarPage(
                sidebarPanel(
                  selectInput('select_covid_metric',
                   "Covid_Metric",
-                  c("Covid_Hospitalized_Cumulative_4_4", "Covid_ICU_Cumulative_4_4", "Perc_Covid_Positive"))
+                  c("Covid_Hospitalized_Cumulative", "Covid_ICU_Cumulative", "Perc_Covid_Positive"))
                ), #closes sidebarPanel
                mainPanel(
                  plotlyOutput('viz_housing_unit'),

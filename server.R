@@ -70,8 +70,8 @@ shinyServer(function(input, output) {
   #--- housing
   housingInput <- reactive({
     if ( "Perc_Covid_Positive" %in% input$select_covid_metric) return(viz_housing_unit_covidpos_hov)
-    if ( "Covid_Hospitalized_Cumulative_4_4" %in% input$select_covid_metric) return(viz_housing_unit_covidhos)
-    if( "Covid_ICU_Cumulative_4_4" %in% input$select_covid_metric) return(viz_housing_unit_coviddeath) 
+    if ( "Covid_Hospitalized_Cumulative" %in% input$select_covid_metric) return(viz_housing_unit_covidhos)
+    if( "Covid_ICU_Cumulative" %in% input$select_covid_metric) return(viz_housing_unit_coviddeath) 
   })
   
   output$viz_housing_unit <- renderPlotly({
@@ -79,32 +79,6 @@ shinyServer(function(input, output) {
     print(housingViz)
   })
 
-  # output$viz_housing_unit <- renderPlotly({
-  #   viz_house_unit_covid_shiny <- ggplot(data = df_house_covid_units,
-  #                                        aes(label = Region,
-  #                                            x = percentages ,
-  #                                            y = Covid_ICU_Cumulative_4_4,
-  #                                            # y = (input$covid_metric),
-  #                                            #y = Perc_Covid_Positive, #input$covid_metric,
-  #                                            #color = unit,
-  #                                            color = State_Density,
-  #                                            text = paste("<b>Region: </b>", Region,
-  #                                                         '<br><b>State Density</b>', State_Density,
-  #                                                         '<br><b>Percentage of tests COVID_Positive </b>', round(Perc_Covid_Positive, 2), "%",
-  #                                                         '<br><b>Percentage of unit type in Region</b>', round(percentages, 2),'%'
-  #                                            ) #closes text
-  #                                        ) #closes aes
-  # ) + #closes ggplot
-  # #geom_smooth(method="lm") +
-  # geom_point() + #facet_grid(~unit) +
-  # ggtitle("Housing Unit and COVID Positive Tests") +
-  # xlab("Percentage of unit type (per region)")
-  # 
-  # viz_house_unit_covid_shiny_hover <-
-  #   ggplotly(viz_house_unit_covid_shiny, tooltip="text") #include region
-  # 
-  # viz_house_unit_covid_shiny_hover
-  # })
 })
 
 
