@@ -32,6 +32,11 @@ shinyUI(navbarPage(
     tabPanel('Introduction',
              includeMarkdown('content/intro.md')),
     tabPanel('Transportation',
+             h1("How Does Public Transportation Impact the Spread of COVID-19?"),
+             p("People often rely on public transportation to get to work and have access to essential services. In a global pandemic, public
+               transportation helped essential workers get to work, but it may also have impacted the transmission of COVID-19.In this
+               analysis, we will explore how the build public transportation systems impact the transmission and rate of COVID-19. At
+               both the state and city levels, we will explore how different public transportation infrastructures impact COVID-19 Spread."),
             sidebarLayout(
               sidebarPanel(
                 selectInput('transportation_metric',
@@ -42,7 +47,8 @@ shinyUI(navbarPage(
               mainPanel(
                 plotlyOutput("transportation", width = "1000px"),
                 plotOutput("nyc_covid"),
-                plotOutput("Borough")
+                plotOutput("Borough"),
+                includeMarkdown('content/tab-transportation-conclusions.md')
               )
               
             )),
