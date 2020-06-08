@@ -124,12 +124,13 @@ df_house_covid_perc <- df_covid_housing %>%
     Perc_10_Unit = (MLT_U10p_ACS_14_18 * 100/ Tot_Housing_Units_ACS_14_18),
     Perc_Crowded = (Crowd_Occp_U_ACS_14_18 * 100/ Tot_Occp_Units_ACS_14_18),
     Perc_Covid_Positive = (Covid_Positive_4_4 * 100/ Covid_Total_Test_Results),
-    Perc_Covid_Deaths = (Covid_Death_4_4 * 100 / Covid_Total_Test_Results)
+    Perc_Covid_Deaths = (Covid_Death_4_4 * 100 / Covid_Total_Test_Results),
+    Total_Person_in_Household = Tot_Prns_in_HHD_CEN_2010
   )
 
 # ----
 df_house_covid_units <- df_house_covid_perc %>%
-  select(Region, State_Density, Perc_Covid_Deaths, Covid_Hospitalized_Cumulative_4_4, Covid_ICU_Cumulative_4_4, Perc_Single_Unit, Perc_2to9_Unit, Perc_10_Unit, Perc_Crowded, Perc_Covid_Positive) %>%
+  select(Region, Total_Person_in_Household, State_Density, Perc_Covid_Deaths, Covid_Hospitalized_Cumulative_4_4, Covid_ICU_Cumulative_4_4, Perc_Single_Unit, Perc_2to9_Unit, Perc_10_Unit, Perc_Crowded, Perc_Covid_Positive) %>%
   gather(key = unit, value = percentages, Perc_Single_Unit:Perc_10_Unit)
 
 
@@ -147,7 +148,7 @@ viz_house_unit_covid <- ggplot(data = df_house_covid_units,
                       ) #closes text
            ) #closes aes
        ) + #closes ggplot
-  geom_smooth(method="lm") +
+  #geom_smooth(method="lm") +
   geom_point() + facet_grid(~unit) +
   ggtitle("Housing Units and COVID Positive Tests") +
   xlab("Percentage of unit type in region") +
@@ -175,7 +176,7 @@ df_house_covid_perc_10 <- df_house_covid_perc %>%
 viz_house_unit_bar <- ggplot(data = df_house_covid_perc_10,
                              aes(x = reorder(Region, Perc_10_Unit), y = Perc_10_Unit, fill = Perc_Covid_Positive)) + 
   geom_bar(stat = "identity") + ggtitle("Region, percentage unit and Covid Tests") +xlab("Region") + ylab("Percentage_10_unit")
-  
+
 #View(df_house_covid_perc)
 # viz_house_unit_bar
 
@@ -190,12 +191,18 @@ viz_house_unit_bar <- ggplot(data = df_house_covid_perc_10,
 viz_house_crowded <- ggplot(data = df_house_covid_units,
        aes(x = Perc_Crowded, y = Perc_Covid_Positive)
        ) + geom_point() +
-  ggtitle("Housing units that are crowded compared to COVID positive tests") +
+  ggtitle("Housing units that are crowded and COVID positive tests") +
   xlab("Percentage of occupied housing units that are crowded") +
   ylab("Percentage of Covid Positive Tests") + geom_smooth()
 
-# viz_house_crowded
-
+# viz_house_total_persons <- ggplot(data = df_house_covid_units,
+#                             aes(x = Total_Person_in_Household, y = Perc_Covid_Positive)
+# ) + geom_point() +
+#   ggtitle("Total numbers of persons per household and COVID positive tests") +
+#   xlab("Total number of persons per household") +
+#   ylab("Percentage of Covid Positive Tests") + geom_smooth()
+# test
+# View(df_house_covid_units)
 
 #----- final visualisations
 # viz_house_crowded
@@ -233,7 +240,7 @@ viz_housing_unit_covidpos <- ggplot(data = df_house_covid_units,
 ) + #closes ggplot
   #geom_smooth(method="lm") +
   geom_point() + facet_grid(~unit) +
-  ggtitle("Housing Units and COVID Positive Tests") +
+  ggtitle("Number of Units in Housing Structure and COVID Positive Tests") +
   xlab("Percentage of unit type in region") +
   ylab("Percentage of COVID Positive Tests")
 
@@ -241,7 +248,11 @@ viz_housing_unit_covidpos_hov <-
   ggplotly(viz_housing_unit_covidpos, tooltip="text") #include region
 
 # === TWO
-viz_housing_unit_covidhos <- ggplot(data = df_house_covid_units,
+View(df_house_covid_units)
+df_house_covid_units_nony <- df_house_covid_units[!df_house_covid_units$Region == "New York", ]
+
+View(df_house_covid_units_nony)
+viz_housing_unit_covidhos <- ggplot(data = df_house_covid_units_nony,
                                     aes(label = Region, #if text, no title; https://stackoverflow.com/questions/36325154/how-to-choose-variable-to-display-in-tooltip-when-using-ggplotly
                                         x = percentages , 
                                         y = Covid_Hospitalized_Cumulative_4_4, 
@@ -249,14 +260,14 @@ viz_housing_unit_covidhos <- ggplot(data = df_house_covid_units,
                                         color = State_Density,
                                         text = paste("<b>Region: </b>", Region,
                                                      '<br><b>State Density</b>', State_Density,
-                                                     '<br><b>Percentage of tests COVID_Positive </b>', round(Perc_Covid_Positive, 2), "%",
+                                                     '<br><b>Number of COVID hospitalizations</b>', round(Covid_Hospitalized_Cumulative_4_4, 2),
                                                      '<br><b>Percentage of unit type in Region</b>', round(percentages, 2),'%'
                                         ) #closes text
                                     ) #closes aes
 ) + #closes ggplot
   #geom_smooth(method="lm") +
   geom_point() + facet_grid(~unit) +
-  ggtitle("Housing Units and COVID Positive Tests") +
+  ggtitle("Number of Units in Housing Structure and COVID Positive Tests") +
   xlab("Percentage of unit type in region") +
   ylab("Number of COVID Hospitalizations")
 
@@ -273,14 +284,14 @@ viz_housing_unit_coviddeath <- ggplot(data = df_house_covid_units,
                                         color = State_Density,
                                         text = paste("<b>Region: </b>", Region,
                                                      '<br><b>State Density</b>', State_Density,
-                                                     '<br><b>Percentage of tests COVID_Positive </b>', round(Perc_Covid_Positive, 2), "%",
+                                                     '<br><b>Percentage of COVID deaths </b>', round(Perc_Covid_Deaths, 2), "%",
                                                      '<br><b>Percentage of unit type in Region</b>', round(percentages, 2),'%'
                                         ) #closes text
                                     ) #closes aes
 ) + #closes ggplot
   #geom_smooth(method="lm") +
   geom_point() + facet_grid(~unit) +
-  ggtitle("Housing Units and COVID Positive Tests") +
+  ggtitle("Number of Units in Housing Structure and COVID Positive Tests") +
   xlab("Percentage of unit type in region") +
   ylab("Percentage of COVID Deaths")
 
