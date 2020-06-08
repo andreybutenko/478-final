@@ -49,9 +49,22 @@ influenza_v_covid_scatterplot <- ggplot(data = nyc_influenza_covid_data) +
     )
 
 
-# Table of proportions (seasonal influenza cases/covid cases per NYC borough)
+# Table of proportions 
 
 nyc_influenza_covid_data <- nyc_influenza_covid_data %>%
   mutate(
-    ratio_influenza_to_covid = INFLUENZA_CASE_COUNT / TOTAL_COVID_CASES
+    proportion_of_total_covid = (TOTAL_COVID_CASES / sum(TOTAL_COVID_CASES)) * 100,
+    proportion_of_total_influenza = (INFLUENZA_CASE_COUNT / sum(INFLUENZA_CASE_COUNT)) * 100
+  )
+
+borough_case_contributions <- nyc_influenza_covid_data %>%
+  select(
+    County,
+    proportion_of_total_covid,
+    proportion_of_total_influenza
+  ) %>%
+  rename(
+    'NYC County/Borough' = County,
+    '% Contribution to Total COVID-19 Case Count' = proportion_of_total_covid,
+    '% Contribution to 2017-18 Influenza Case Count' = proportion_of_total_influenza
   )
