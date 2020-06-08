@@ -6,3 +6,4 @@
 - [NYC Subway Station Locations by Zipcode](https://data.cityofnewyork.us/Transportation/Subway-Stations/arq3-7z49)
 - [NYC Subway Weekly Traffic](http://web.mta.info/nyct/facts/ridership/ridership_sub.htm)
 - [NYC COVID-19 Data by Zipcode](https://github.com/nychealth/coronavirus-data)
+- [Influenza in New York 2009 - 2018](https://www.kaggle.com/titustitus/h1n1-new-york-2009)

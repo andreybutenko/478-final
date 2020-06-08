@@ -47,3 +47,11 @@ influenza_v_covid_scatterplot <- ggplot(data = nyc_influenza_covid_data) +
     y = "COVID-19 Case Count (Date?)",
     color = "NYC County"
     )
+
+
+# Table of proportions (seasonal influenza cases/covid cases per NYC borough)
+
+nyc_influenza_covid_data <- nyc_influenza_covid_data %>%
+  mutate(
+    ratio_influenza_to_covid = INFLUENZA_CASE_COUNT / TOTAL_COVID_CASES
+  )
