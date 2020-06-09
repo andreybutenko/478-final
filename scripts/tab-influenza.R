@@ -44,7 +44,7 @@ influenza_v_covid_scatterplot <- ggplot(data = nyc_influenza_covid_data) +
   labs(
     title = "Comparing Volume of Seasonal Influenza Cases to COVID-19 Cases by New York City County",
     x = "Influenza Case Count (2017-2018 Season)",
-    y = "COVID-19 Case Count (Date?)",
+    y = "Early COVID-19 Case Count",
     color = "NYC County"
     )
 
