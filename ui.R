@@ -27,6 +27,7 @@ industry_full_data <- read.csv('./data/prepped/industry-covid19-full-data.csv',
 
 # Define UI for application that draws a histogram
 shinyUI(navbarPage(
+    theme = 'styles.css',
     'COVID-19 Transmission in Built Environments',
     
     tabPanel('Introduction',
@@ -146,6 +147,8 @@ shinyUI(navbarPage(
              column(12 - 3, includeMarkdown('content/tab-industries-conclusions.md'))),
     tabPanel('Conclusion',
              includeMarkdown('content/conclusions.md')),
-    tabPanel('Sources',
-             includeMarkdown('content/sources.md'))
+    tabPanel('About',
+             includeHTML('content/about.html'),
+             tags$div(includeMarkdown('content/sources.md'),
+                      class = 'about-section about-sources'))
 ))

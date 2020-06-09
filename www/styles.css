@@ -1,0 +1,89 @@
+/* About General */
+
+.about-section {
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 32px;
+}
+
+.about-section h1 {
+  color: white;
+  font-size: 56px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* About Team */
+
+.about-team {
+  margin-top: -20px;
+  background-color: #6c5ce7;
+}
+
+.profiles-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.profiles-container > div {
+  flex: 1 0 300px;
+  max-width: 500px;
+  margin-left: 32px;
+  padding: 32px;
+  background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.profiles-container > div:first-of-type {
+  margin-left: 0;
+}
+
+.profiles-container > div img {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+  .profiles-container {
+    justify-content: space-around;
+    align-items: stretch;
+  }
+
+  .profiles-container > div {
+    flex: 1 0 calc(50% - 32px);
+    margin-left: 0;
+    margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .profiles-container {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+}
+
+/* About Sources */
+
+.about-sources {
+  background-color: #00b894;
+}
+
+.about-sources > ul {
+  background-color: white;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  padding-top: 32px;
+  padding-bottom: 32px;
+  padding-left: 42px;
+  padding-right: 42px;
+  width: 600px;
+  margin: 0 auto;
+  max-width: 100%;
+  display: block;
+}
+
+.about-sources > ul li {
+  margin-bottom: 0.5em;
+}
