@@ -37,8 +37,9 @@ public_transportation_viz <- ggplot(commuter_top_and_bot, aes(x = reorder(Region
                                                               fill = Public_transportation_rate)) +
   geom_col() + scale_fill_gradient(low="white", high="darkblue") + 
   labs(
+    title = 'COVID-19 Prevalence vs Public Transit Usage by State',
     x = "State",
-    y = "Ratio of Population with COvid-19",
+    y = "Ratio of Population with COVID-19",
     fill = "Ratio of Public Trans.") + theme_dark()
 
 
@@ -67,8 +68,9 @@ drive_viz <- ggplot(commuter_top_and_bot_drive, aes(x = reorder(Region, Covid_po
                                                               fill = Drive_to_work_rate)) +
   geom_col() + scale_fill_gradient(low="white", high="darkblue") + 
   labs(
+    title = 'COVID-19 Prevalence vs Commuting by Care by State',
     x = "State",
-    y = "Ratio of Population with COvid-19",
+    y = "Ratio of Population with COVID-19",
     fill = "Ratio of Driving") + theme_dark()
 
 
@@ -107,6 +109,7 @@ borough_graph <- ggplot(joined_data, aes(x = reorder(Borough, covid_pos_rate),
                              y = covid_pos_rate,
                              fill = total_cases)) + geom_col() + 
   scale_fill_gradient(low="white", high="darkblue") + labs(
+    title = 'COVID-19 Prevalence and Subway Traffic by NYC Borough',
     x = "New York City Boroughs",
     y = "Covid Cases per 100,000",
     fill = "Subway Traffic"
@@ -144,6 +147,11 @@ nyc_mapping <- ggplot(nyc_zip_merge, aes(longitude, latitude)) +
   geom_polygon(data = nyc_map, aes(x=long,y=lat, group = group),color='gray',fill=NA,alpha=.5) + 
   geom_point(aes(color = COVID_CASE_RATE), size = 10, alpha=.8) + scale_color_gradient(low="white", high="orange") +
   xlim(-74.3,-73.7)+ylim(40.4,40.9) +
-  geom_point(data = nyc_stat_loc, aes(x=long, y=lat), color='darkblue', alpha=.3, size=3)
+  geom_point(data = nyc_stat_loc, aes(x=long, y=lat), color='darkblue', alpha=.3, size=3) +
+  labs(title = 'COVID-19 Cases and Subway Stations in NYC',
+       subtitle = 'Blue dots are subway stations',
+       fill = 'COVID-19 Case Rate',
+       x = 'Longitude',
+       y = 'Latitude')
 
 
