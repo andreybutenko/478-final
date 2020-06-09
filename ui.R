@@ -31,7 +31,9 @@ shinyUI(navbarPage(
     'COVID-19 Transmission in Built Environments',
     
     tabPanel('Introduction',
-             includeMarkdown('content/intro.md')),
+             column(3),
+             column(12 - (2 * 3),
+                    includeMarkdown('content/intro.md'))),
     tabPanel('Transportation',
              h1("How Does Public Transportation Impact the Spread of COVID-19?"),
              p("People often rely on public transportation to get to work and have access to essential services. In a global pandemic, public
