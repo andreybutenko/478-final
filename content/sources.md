@@ -7,3 +7,5 @@
 - [NYC Subway Weekly Traffic](http://web.mta.info/nyct/facts/ridership/ridership_sub.htm)
 - [NYC COVID-19 Data by Zipcode](https://github.com/nychealth/coronavirus-data)
 - [Influenza in New York 2009 - 2018](https://www.kaggle.com/titustitus/h1n1-new-york-2009)
+- [Planning Database with 2014-2018 American Community Survey data and 2010 Census](https://www.census.gov/data/developers/data-sets/planning-database.html)
+- [Documentation for Planning Database 2014-2018 ACS, 2010 Census](https://www.census.gov/content/dam/Census/topics/research/2019_Tract_PDBDocumentationV3.pdf)
