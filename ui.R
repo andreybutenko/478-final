@@ -83,7 +83,11 @@ shinyUI(navbarPage(
              ), #closes tabPanel Housing Density
     tabPanel('Influenza Correlations',
              h1('How does the volume of COVID-19 cases compare to that of seasonal influenza (2017-2018) in different parts of New York City?'),
-             p('Places like New York City are vast, meaning that one can observe a diverse range of built environments accross its bouroughs. We thought that it would be interesting to compare early COVID-19 case counts to influenza case counts from the 2017-2018 season in different parts of NYC in order to help us think about how and why transmission rates might differ between different environments of a single city.')),
+             p('Places like New York City are vast, meaning that one can observe a diverse range of built environments accross its bouroughs. We thought that it would be interesting to compare early COVID-19 case counts to influenza case counts from the 2017-2018 season in different parts of NYC in order to help us think about how and why transmission rates might differ between different environments of a single city.'),
+             plotOutput('influenza_covid_scatterplot'),
+             hr(),
+             h2('Contribution to COVID-19 and influenza cases by borough'),
+             tableOutput('influenza_covid_table')),
     tabPanel('Industries and Jobs',
              h1('How does the job environment affect the spread of disease?'),
              p('COVID-19 can spread quickly though a workplace. Workplaces differ across industries, and some workplaces are easier implement socially-distancing measures in than others. For this reason, it is valuable to explore the industries residents of different states are employed in to understand the relationship. In this, we will compare the proportions of industry of employment between the states with the highest COVID-19 prevalence and the states with the lowest COVID-19 prevalence.'),

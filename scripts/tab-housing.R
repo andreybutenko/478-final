@@ -166,7 +166,7 @@ viz_house_unit_covid_hover <-
 # View(df_raw_housing)
 # View(df_covid_housing)
 # View(df_house_covid_perc)
-View(df_house_covid_units)
+# View(df_house_covid_units)
 
 ##### bar graph viz
 df_house_covid_perc_10 <- df_house_covid_perc %>%
@@ -248,10 +248,10 @@ viz_housing_unit_covidpos_hov <-
   ggplotly(viz_housing_unit_covidpos, tooltip="text") #include region
 
 # === TWO
-View(df_house_covid_units)
+# View(df_house_covid_units)
 df_house_covid_units_nony <- df_house_covid_units[!df_house_covid_units$Region == "New York", ]
 
-View(df_house_covid_units_nony)
+# View(df_house_covid_units_nony)
 viz_housing_unit_covidhos <- ggplot(data = df_house_covid_units_nony,
                                     aes(label = Region, #if text, no title; https://stackoverflow.com/questions/36325154/how-to-choose-variable-to-display-in-tooltip-when-using-ggplotly
                                         x = percentages , 
