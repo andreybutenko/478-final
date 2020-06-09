@@ -40,7 +40,8 @@ influenza_v_covid_barplot <- ggplot(data = nyc_flu_covid_reshaped,
 influenza_v_covid_scatterplot <- ggplot(data = nyc_influenza_covid_data) +
   geom_point(mapping = aes(x = nyc_influenza_covid_data$INFLUENZA_CASE_COUNT,
                            y = nyc_influenza_covid_data$TOTAL_COVID_CASES,
-                           color = nyc_influenza_covid_data$County)) +
+                           color = nyc_influenza_covid_data$County),
+             size = 3) +
   labs(
     title = "Comparing Volume of Seasonal Influenza Cases to COVID-19 Cases by New York City County",
     x = "Influenza Case Count (2017-2018 Season)",

@@ -67,6 +67,14 @@ shinyServer(function(input, output) {
     nyc_mapping
   })
   
+  output$influenza_covid_scatterplot <- renderPlot({
+    influenza_v_covid_scatterplot
+  })
+  
+  output$influenza_covid_table <- renderTable({
+    borough_case_contributions
+  })
+  
   
   #--- housing
   housingInput <- reactive({
